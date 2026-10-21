@@ -16,6 +16,7 @@ export const colors = {
 
 export const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
+  authKeyboardAvoiding: { flex: 1 },
   center: {
     flex: 1,
     alignItems: 'center',
@@ -23,7 +24,11 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.bg,
     gap: 12,
   },
-  authWrap: { flex: 1, paddingHorizontal: 24, justifyContent: 'center' },
+  authWrap: {
+    flexGrow: 1,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+  },
   logo: {
     width: 58,
     height: 58,
@@ -327,7 +332,12 @@ export const styles = StyleSheet.create({
     letterSpacing: 2,
     marginTop: 20,
   },
-  formPage: { paddingHorizontal: 20, paddingTop: 10, paddingBottom: 35 },
+  formPage: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 35,
+  },
   backLink: {
     fontSize: 13,
     color: colors.purple,

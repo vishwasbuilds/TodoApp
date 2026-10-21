@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  ScrollView,
   StatusBar,
   Text,
   TouchableOpacity,
@@ -44,76 +45,81 @@ export default function AuthScreen({
     <SafeAreaView style={styles.safe}>
       <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView
-        style={styles.authWrap}
+        style={styles.authKeyboardAvoiding}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>✓</Text>
-        </View>
-        <Text style={styles.brand}>To-Do</Text>
-        <Text style={styles.tagline}>A little progress, every day.</Text>
-        <View style={styles.authCard}>
-          <Text style={styles.heading}>
-            {authMode === 'login' ? 'Welcome back' : 'Create account'}
-          </Text>
-          <Text style={styles.muted}>
-            {authMode === 'login'
-              ? 'Log in to pick up where you left off.'
-              : 'Organize your day with a new account.'}
-          </Text>
-          {authMode === 'register' && (
-            <Field
-              label="YOUR NAME"
-              value={authName}
-              onChangeText={setAuthName}
-              placeholder="Your name"
-            />
-          )}
-          <Field
-            label="EMAIL ADDRESS"
-            value={authEmail}
-            onChangeText={setAuthEmail}
-            placeholder="you@example.com"
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <Field
-            label="PASSWORD"
-            value={authPassword}
-            onChangeText={setAuthPassword}
-            placeholder="At least 6 characters"
-            secureTextEntry
-          />
-          <TouchableOpacity
-            style={styles.primaryButton}
-            onPress={onSubmit}
-            disabled={authBusy}
-          >
-            {authBusy ? (
-              <ActivityIndicator color="white" />
-            ) : (
-              <Text style={styles.primaryText}>
-                {authMode === 'login' ? 'Log in' : 'Create account'} →
-              </Text>
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              setAuthMode(authMode === 'login' ? 'register' : 'login')
-            }
-            style={styles.switchAuth}
-          >
-            <Text style={styles.switchText}>
-              {authMode === 'login'
-                ? 'New here?  '
-                : 'Already have an account?  '}
-              <Text style={{ color: colors.purple, fontWeight: '800' }}>
-                {authMode === 'login' ? 'Create account' : 'Log in'}
-              </Text>
+        <ScrollView
+          contentContainerStyle={styles.authWrap}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.logo}>
+            <Text style={styles.logoText}>✓</Text>
+          </View>
+          <Text style={styles.brand}>To-Do</Text>
+          <Text style={styles.tagline}>A little progress, every day.</Text>
+          <View style={styles.authCard}>
+            <Text style={styles.heading}>
+              {authMode === 'login' ? 'Welcome back' : 'Create account'}
             </Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.footer}>YOUR TIME. YOUR PRIORITIES.</Text>
+            <Text style={styles.muted}>
+              {authMode === 'login'
+                ? 'Log in to pick up where you left off.'
+                : 'Organize your day with a new account.'}
+            </Text>
+            {authMode === 'register' && (
+              <Field
+                label="YOUR NAME"
+                value={authName}
+                onChangeText={setAuthName}
+                placeholder="Your name"
+              />
+            )}
+            <Field
+              label="EMAIL ADDRESS"
+              value={authEmail}
+              onChangeText={setAuthEmail}
+              placeholder="you@example.com"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <Field
+              label="PASSWORD"
+              value={authPassword}
+              onChangeText={setAuthPassword}
+              placeholder="At least 6 characters"
+              secureTextEntry
+            />
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={onSubmit}
+              disabled={authBusy}
+            >
+              {authBusy ? (
+                <ActivityIndicator color="white" />
+              ) : (
+                <Text style={styles.primaryText}>
+                  {authMode === 'login' ? 'Log in' : 'Create account'} →
+                </Text>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                setAuthMode(authMode === 'login' ? 'register' : 'login')
+              }
+              style={styles.switchAuth}
+            >
+              <Text style={styles.switchText}>
+                {authMode === 'login'
+                  ? 'New here?  '
+                  : 'Already have an account?  '}
+                <Text style={{ color: colors.purple, fontWeight: '800' }}>
+                  {authMode === 'login' ? 'Create account' : 'Log in'}
+                </Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.footer}>YOUR TIME. YOUR PRIORITIES.</Text>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
